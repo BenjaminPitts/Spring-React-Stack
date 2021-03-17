@@ -101,15 +101,15 @@ class App extends React.Component {
                 <input onKeyUp={this.changeNewPersonAge} type="number" placeholder="age" /><br/>
                 <input type="submit" value="Create Person" />
             </form><br />
-            <h2>List of People</h2>
+            <h2>List of People:</h2>
             <div className='itemBox'>
                 {
                     this.state.people.map(
                         (person, index) => {
                             return <div className='item' key={index}>
 
-                                Name: {person.name}<br />
-                                Age: {person.age}
+                                <h3>Name: {person.name}<br />
+                                Age: {person.age}</h3>
 
                                 <details>
                                 <summary>Edit {person.name}'s Details</summary>
