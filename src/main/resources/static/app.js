@@ -24,10 +24,13 @@ class App extends React.Component {
         ).then(
             (response) => {
                 this.setState({
-                    people:response.data
+                    people:response.data,
+                    name: '',
+                    age: ''
                 })
             }
         )
+        event.target.reset()
     }
 
     changeNewPersonAge = (event) => {
@@ -71,6 +74,7 @@ class App extends React.Component {
                 })
             }
         )
+        event.target.reset()
     }
 
     changeUpdatePersonName = (event) => {
@@ -90,34 +94,38 @@ class App extends React.Component {
     }
 
     render = () => {
-        return <div>
+        return <div className='main'>
             <h2>Create Person</h2>
             <form onSubmit={this.createPerson}>
                 <input onKeyUp={this.changeNewPersonName} type="text" placeholder="name" /><br/>
                 <input onKeyUp={this.changeNewPersonAge} type="number" placeholder="age" /><br/>
                 <input type="submit" value="Create Person" />
-            </form>
+            </form><br />
             <h2>List of People</h2>
-            <ul>
+            <div className='itemBox'>
                 {
                     this.state.people.map(
                         (person, index) => {
-                            return <li key={index}>
+                            return <div className='item' key={index}>
 
-                                {person.name}: {person.age}
+                                Name: {person.name}<br />
+                                Age: {person.age}
 
-                                <button value={person.id} onClick={this.deletePerson}>DELETE</button>
+                                <details>
+                                <summary>Edit {person.name}'s Details</summary>
 
                                 <form id={person.id} onSubmit={this.updatePerson}>
                                     <input onKeyUp={this.changeUpdatePersonName} type="text" placeholder="name"/><br/>
                                     <input onKeyUp={this.changeUpdatePersonAge} type="number" placeholder="age"/><br/>
                                     <input type="submit" value="Update Person"/>
                                 </form>
-                            </li>
+                                <button id='delete' value={person.id} onClick={this.deletePerson}>DELETE</button>
+                                </details>
+                            </div>
                         }
                     )
                 }
-            </ul>
+            </div>
         </div>
     }
 }
