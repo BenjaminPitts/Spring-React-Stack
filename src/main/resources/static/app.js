@@ -1,126 +1,149 @@
 class App extends React.Component {
     state = {
-        people:[]
+        flashcards:[]
     }
 
     componentDidMount = () => {
-        axios.get('/people').then(
+        axios.get('/flashcards').then(
             (response) => {
                 this.setState({
-                    people:response.data
+                    flashcards:response.data
                 })
             }
         )
     }
 
-    createPerson = (event) => {
+    createFlashcard = (event) => {
         event.preventDefault();
         axios.post(
-            '/people',
+            '/flashcards',
             {
-                name:this.state.newPersonName,
-                age:this.state.newPersonAge,
+                question:this.state.newFlashcardQuestion,
+                tips:this.state.newFlashcardTips,
+                answer:this.state.newFlashcardAnswer
             }
         ).then(
             (response) => {
                 this.setState({
-                    people:response.data,
-                    name: '',
-                    age: ''
+                    flashcards:response.data,
+                    question: '',
+                    tips: '',
+                    answer: ''
                 })
             }
         )
         event.target.reset()
     }
 
-    changeNewPersonAge = (event) => {
+    changeNewFlashcardTips = (event) => {
         this.setState({
-            newPersonAge:event.target.value
+            newFlashcardTips:event.target.value
         });
     }
 
-    changeNewPersonName = (event) => {
+    changeNewFlashcardQuestion = (event) => {
         this.setState({
-            newPersonName:event.target.value
+            newFlashcardQuestion:event.target.value
         });
     }
 
-    deletePerson = (event) => {
-        axios.delete('/people/' + event.target.value).then(
+    changeNewFlashcardAnswer = (event) => {
+        this.setState({
+            newFlashcardAnswer:event.target.value
+        });
+    }
+
+    deleteFlashcard = (event) => {
+        axios.delete('/flashcards/' + event.target.value).then(
             (response) => {
                 this.setState({
-                    people:response.data
+                    flashcards:response.data
                 })
             }
         )
 
     }
 
-    updatePerson = (event) => {
+    updateFlashcard = (event) => {
         event.preventDefault();
         const id = event.target.getAttribute('id');
         axios.put(
-            '/people/' + id,
+            '/flashcards/' + id,
             {
-                name:this.state.updatePersonName,
-                age:this.state.updatePersonAge,
+                question:this.state.updateFlashcardQuestion,
+                tips:this.state.updateFlashcardTips,
+                answer:this.state.updateFlashcardAnswer
             }
         ).then(
             (response) => {
                 this.setState({
-                    people:response.data,
-                    name:'',
-                    age:null,
+                    flashcards:response.data,
+                    question:'',
+                    tips:'',
+                    answer: ''
                 })
             }
         )
         event.target.reset()
     }
 
-    changeUpdatePersonName = (event) => {
+    changeUpdateFlashcardQuestion = (event) => {
         this.setState(
             {
-                updatePersonName:event.target.value
+                updateFlashcardQuestion:event.target.value
             }
         )
     }
 
-    changeUpdatePersonAge = (event) => {
+    changeUpdateFlashcardTips = (event) => {
         this.setState(
             {
-                updatePersonAge:event.target.value
+                updateFlashcardTips:event.target.value
+            }
+        )
+    }
+
+    changeUpdateFlashcardAnswer = (event) => {
+        this.setState(
+            {
+                updateFlashcardAnswer:event.target.value
             }
         )
     }
 
     render = () => {
         return <div className='main'>
-            <h2>Create Person</h2>
-            <form onSubmit={this.createPerson}>
-                <input onKeyUp={this.changeNewPersonName} type="text" placeholder="name" /><br/>
-                <input onKeyUp={this.changeNewPersonAge} type="number" placeholder="age" /><br/>
-                <input type="submit" value="Create Person" />
+            <form onSubmit={this.createFlashcard}>
+                <input onKeyUp={this.changeNewFlashcardQuestion} type="text" placeholder="question" /><br/>
+                <input onKeyUp={this.changeNewFlashcardTips} type="text" placeholder="tips" /><br/>
+                <input onKeyUp={this.changeNewFlashcardAnswer}
+                type='text' placeholder='your answers' /><br />
+                <input id='create' type="submit" value="Create New Flashcard" />
             </form><br />
-            <h2>List of People:</h2>
+            <h2>List of Interview Questions:</h2>
             <div className='itemBox'>
                 {
-                    this.state.people.map(
-                        (person, index) => {
+                    this.state.flashcards.map(
+                        (card, index) => {
                             return <div className='item' key={index}>
 
-                                <h3>Name: {person.name}<br />
-                                Age: {person.age}</h3>
+                            <details>
+                                <summary>{card.question}</summary>
+                                Tips: <i>{card.tips}</i><br />
+                                Answers: {card.answer}
 
                                 <details>
-                                <summary>Edit {person.name}'s Details</summary>
+                                <summary>Edit Details</summary>
 
-                                <form id={person.id} onSubmit={this.updatePerson}>
-                                    <input onKeyUp={this.changeUpdatePersonName} type="text" placeholder="name"/><br/>
-                                    <input onKeyUp={this.changeUpdatePersonAge} type="number" placeholder="age"/><br/>
-                                    <input type="submit" value="Update Person"/>
+                                <form id={card.id} onSubmit={this.updateFlashcard}>
+                                    <input onKeyUp={this.changeUpdateFlashcardQuestion} type="text" placeholder="question"/><br/>
+                                    <input onKeyUp={this.changeUpdateFlashcardTips} type="text" placeholder="tips"/><br/>
+                                    <input onKeyUp={this.changeUpdateFlashcardAnswer} type='text' placeholder='answers' /><br />
+                                    <input id='update' type="submit" value="Update Flashcard"/>
                                 </form>
-                                <button id='delete' value={person.id} onClick={this.deletePerson}>DELETE</button>
+                                <button id='delete' value={card.id} onClick={this.deleteFlashcard}>DELETE</button>
                                 </details>
+                              </details>
                             </div>
                         }
                     )

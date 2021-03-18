@@ -17,34 +17,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RestController
 public class ContactsApplication {
 	@Autowired
-	private PersonRepository personRepository;
+	private FlashcardRepository flashcardsRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ContactsApplication.class, args);
 	}
 
-	@GetMapping("/people")
-	public Iterable<Person> index() {
-		return personRepository.findAll();
+	@GetMapping("/flashcards")
+	public Iterable<Flashcard> index() {
+		return flashcardsRepository.findAll();
 	}
 
-	@PostMapping("/people")
-	public Iterable<Person> create (@RequestBody Person personData) {
-		personRepository.save(personData);
-		return personRepository.findAll();
+	@PostMapping("/flashcards")
+	public Iterable<Flashcard> create (@RequestBody Flashcard flashcardsData) {
+		flashcardsRepository.save(flashcardsData);
+		return flashcardsRepository.findAll();
 	}
 
-	@DeleteMapping("/people/{id}")
-	public Iterable<Person> delete(@PathVariable int id) {
-		personRepository.deleteById(id);
-		return personRepository.findAll();
+	@DeleteMapping("/flashcards/{id}")
+	public Iterable<Flashcard> delete(@PathVariable int id) {
+		flashcardsRepository.deleteById(id);
+		return flashcardsRepository.findAll();
 	}
 
-	@PutMapping("/people/{id}")
-	public Iterable<Person> update(@PathVariable int id, @RequestBody Person personData) {
-		personData.setId(id);
-		personRepository.save(personData);
-		return personRepository.findAll();
+	@PutMapping("/flashcards/{id}")
+	public Iterable<Flashcard> update(@PathVariable int id, @RequestBody Flashcard flashcardsData) {
+		flashcardsData.setId(id);
+		flashcardsRepository.save(flashcardsData);
+		return flashcardsRepository.findAll();
 	}
 
 }
