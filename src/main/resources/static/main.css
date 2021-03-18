@@ -94,14 +94,14 @@ summary:hover, #create:hover, #update:hover {
 }
 .item {
   position:relative;
-  margin: 10px;
+  margin: .2rem;
   transition: 2s;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  width: 100%;
+  width: 95%;
 }
 .create {
   display: flex;
@@ -121,7 +121,7 @@ h1 {
     font-size: 25px;
     width: 100%;
   }
-  
+
 .itemBox {
     display: flex;
     flex-direction: row;
