@@ -1,17 +1,17 @@
 body {
-  background: #270808;
+  background: #696969;
   color: ivory;
   text-align: center;
   width: 100%;
+  font-family: 'Blinker', sans-serif;
 }
 
 h1 {
-font-family: monospace;
-font-size: 80px;
-padding: 1.5rem;
-margin: 0;
+font-size: 90px;
 background: #090909;
-width: 100%;
+width: 98%;
+margin: 0;
+padding: 1.5rem 0;
 text-align: center;
 }
 h2, h3, h4 {
@@ -20,6 +20,9 @@ h2, h3, h4 {
 }
 i {
   color: gold;
+}
+b {
+  color: #090909;
 }
 a {
   text-decoration: none;
@@ -52,7 +55,10 @@ details {
   font-family: monospace;
   font-size: 18px;
 }
-input:hover {
+summary {
+  text-align: left;
+}
+input:hover, textarea:hover {
   background: gold;
   transition:1s;
 }
@@ -65,7 +71,7 @@ summary:hover, #create:hover, #update:hover {
 }
 .item:hover {
  transition: 2s;
- box-shadow:6px 6px 6px 6px #222939;
+ box-shadow:3px 3px 8px #090909;
  border-radius:10px;
 }
 .container {
@@ -82,14 +88,16 @@ summary:hover, #create:hover, #update:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  width: 94%;
 }
 .itemBox {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 }
 .item {
@@ -99,9 +107,9 @@ summary:hover, #create:hover, #update:hover {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  width: 95%;
+  width: 85%;
 }
 .create {
   display: flex;
@@ -115,11 +123,19 @@ summary:hover, #create:hover, #update:hover {
   font-family: monospace;
   font-size: 35px;
 }
+#gray {
+  color: gray;
+  font-style: italic;
+  width: 90%;
+}
+textarea {
+  resize: none;
+}
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
 h1 {
-    font-size: 25px;
-    width: 100%;
+    font-size: 30px;
+    width: 96%;
   }
 
 .itemBox {
@@ -129,5 +145,8 @@ h1 {
     justify-content: center;
     align-items: center;
   }
-
+textarea {
+  width: 80%;
+  height: 50%;
+}
 }
