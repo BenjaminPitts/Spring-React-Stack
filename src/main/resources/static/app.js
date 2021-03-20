@@ -20,7 +20,9 @@ class App extends React.Component {
             {
                 question:this.state.newFlashcardQuestion,
                 tips:this.state.newFlashcardTips,
-                answer:this.state.newFlashcardAnswer
+                answer:this.state.newFlashcardAnswer,
+                examples:this.state.newFlashcardExamples
+
             }
         ).then(
             (response) => {
@@ -28,7 +30,8 @@ class App extends React.Component {
                     flashcards:response.data,
                     question: '',
                     tips: '',
-                    answer: ''
+                    answer: '',
+                    examples: ''
                 })
             }
         )
@@ -54,6 +57,12 @@ class App extends React.Component {
         });
     }
 
+    changeNewFlashcardExamples = (event) => {
+        this.setState({
+            newFlashcardExamples:event.target.value
+        });
+    }
+
     deleteFlashcard = (event) => {
         axios.delete('/flashcards/' + event.target.value).then(
             (response) => {
@@ -73,7 +82,9 @@ class App extends React.Component {
             {
                 question:this.state.updateFlashcardQuestion,
                 tips:this.state.updateFlashcardTips,
-                answer:this.state.updateFlashcardAnswer
+                answer:this.state.updateFlashcardAnswer,
+                examples:this.state.updateFlashcardExamples
+
             }
         ).then(
             (response) => {
@@ -81,7 +92,8 @@ class App extends React.Component {
                     flashcards:response.data,
                     question:'',
                     tips:'',
-                    answer: ''
+                    answer: '',
+                    examples: ''
                 })
             }
         )
@@ -113,6 +125,14 @@ class App extends React.Component {
         )
     }
 
+    changeUpdateFlashcardExamples = (event) => {
+        this.setState(
+            {
+                updateFlashcardExamples:event.target.value
+            }
+        )
+    }
+
     // randomFlashcard = (card) => {
     //   for (let i=0; i< 50; i++) {
     //     const j = Math.floor(Math.random() * (i + 1))
@@ -134,8 +154,7 @@ class App extends React.Component {
     // }
 
     render = () => {
-        return <div className='main'>
-            <h2>List of Interview Questions:</h2><br />
+        return <div className='main'><br />
             <div className='itemBox'>
                 {
                     this.state.flashcards.map(
@@ -145,7 +164,8 @@ class App extends React.Component {
                             <details>
                                 <summary>{card.question}</summary><br />
                                 Pro Tips: <i>{card.tips}</i><br />
-                                My Answers: <b>{card.answer}</b>
+                                My Answers: <b>{card.answer}</b><br />
+                                Examples: <b>{card.examples}</b>
 
                                 <details>
                                 <summary>Edit Details</summary><br />
@@ -154,6 +174,7 @@ class App extends React.Component {
                                     <input id='gray' onKeyUp={this.changeUpdateFlashcardQuestion} type="text" defaultValue={card.question} /><br/>
                                     <input id='gray' onKeyUp={this.changeUpdateFlashcardTips} type="text" defaultValue={card.tips} /><br/>
                                     <input id='gray' onKeyUp={this.changeUpdateFlashcardAnswer} type='text' defaultValue={card.answer} /><br />
+                                    <input id='gray' onKeyUp={this.changeUpdateFlashcardExamples} type='text' defaultValue={card.examples} /><br />
                                     <input id='update' type="submit" value="Update Flashcard"/>
                                 </form>
                                 <button id='delete' value={card.id} onClick={this.deleteFlashcard}>DELETE</button>
@@ -166,10 +187,12 @@ class App extends React.Component {
             </div>
             <br /><br />
             <form onSubmit={this.createFlashcard}>
-                <textarea rows='5' cols='40' onKeyUp={this.changeNewFlashcardQuestion} type="text" placeholder="question" /><br/>
-                <textarea rows='5' cols='40' onKeyUp={this.changeNewFlashcardTips} type="text" placeholder="tips" /><br/>
+                <textarea rows='5' cols='40' onKeyUp={this.changeNewFlashcardQuestion} type="text" placeholder="interview question" /><br/>
+                <textarea rows='5' cols='40' onKeyUp={this.changeNewFlashcardTips} type="text" placeholder="pro tips" /><br/>
                 <textarea rows='5' cols='40' onKeyUp={this.changeNewFlashcardAnswer}
                 type='text' placeholder='your answers' /><br />
+                <textarea rows='5' cols='40' onKeyUp={this.changeNewFlashcardExamples}
+                type='text' placeholder='specific examples' /><br />
                 <input id='create' type="submit" value="Create A New Flashcard" />
             </form><br /><br />
         </div>
@@ -185,6 +208,7 @@ ReactDOM.render(
 // 1. Tell Me About Yourself.
 // This question seems simple, so many people fail to prepare for it, but it’s crucial. Here's the deal: Don’t give your complete employment (or personal) history. Instead, give a pitch—one that’s concise and compelling and that shows exactly why you’re the right fit for the job. Muse writer and MIT career counselor Lily Zhang recommends using a present, past, future formula. Talk a little bit about your current role (including the scope and perhaps one big accomplishment), then give some background as to how you got there and experience you have that’s relevant. Finally, segue into why you want—and would be perfect for—this role.
 //
+// I love solving problems and helping people. I have a background in restaurant management so I am a team leader and I thrive in a fast paced environment. I am the right person for this job because of my strong work ethic and I'm fun to work with!
 // Read More: A Complete Guide to Answering “Tell Me About Yourself” in an Interview (Plus Examples!)
 //
 // 2. How Did You Hear About This Position?

@@ -17,6 +17,8 @@ public class Flashcard {
 
   private String answer;
 
+  private String examples;
+
   public Integer getId() {
     return id;
   }
@@ -47,5 +49,13 @@ public class Flashcard {
 
   public void setAnswer(String answer) {
     this.answer = answer;
+  }
+
+  public String getExamples() {
+    return examples;
+  }
+
+  public void setExamples(String examples) {
+    this.examples = examples;
   }
 }

@@ -54,13 +54,14 @@ input {
 details {
   font-family: monospace;
   font-size: 18px;
+  background: #696969;
 }
 summary {
   text-align: left;
 }
 input:hover, textarea:hover {
   background: gold;
-  transition:1s;
+  transition:.5s;
 }
 button:hover{
   background:red;
