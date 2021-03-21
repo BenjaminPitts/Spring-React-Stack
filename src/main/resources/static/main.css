@@ -72,7 +72,7 @@ summary:hover, #create:hover, #update:hover {
 }
 .item:hover {
  transition: 1s;
- box-shadow:6px 6px 8px #090909;
+ box-shadow:8px 8px 8px #090909;
 }
 .container {
   display: flex;
@@ -103,7 +103,7 @@ summary:hover, #create:hover, #update:hover {
 .item {
   position:relative;
   margin: .5rem;
-  transition: 2s;
+  transition: 3s;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
