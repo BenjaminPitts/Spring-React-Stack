@@ -71,9 +71,8 @@ summary:hover, #create:hover, #update:hover {
   cursor: pointer;
 }
 .item:hover {
- transition: 2s;
- border: 1px solid #090909;
- box-shadow:8px 8px 8px #090909;
+ transition: 1s;
+ box-shadow:6px 6px 8px #090909;
 }
 .container {
   display: flex;
@@ -103,14 +102,14 @@ summary:hover, #create:hover, #update:hover {
 }
 .item {
   position:relative;
-  margin: .4rem;
+  margin: .5rem;
   transition: 2s;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 85%;
+  width: 95%;
 }
 .create {
   display: flex;
