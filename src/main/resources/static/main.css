@@ -54,6 +54,7 @@ input {
 details {
   font-family: monospace;
   font-size: 18px;
+  padding: .2rem;
   background: #696969;
 }
 summary {
@@ -127,6 +128,9 @@ summary:hover, #create:hover, #update:hover {
   color: gray;
   font-style: italic;
   width: 90%;
+}
+#gold:hover {
+  color: gold;
 }
 textarea {
   resize: none;
